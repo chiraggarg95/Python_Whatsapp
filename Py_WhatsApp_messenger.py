@@ -6,9 +6,12 @@ from selenium.webdriver.common.by import By
 import time 
 
 
-#using Firefox as Browser.
+#use the browser as per your choice
 
 driver=webdriver.Firefox()
+
+# driver=webdriver.Chrome()
+
 
 driver.get("https://web.whatsapp.com/")
 wait=WebDriverWait(driver, 120)         #change wait time according to internet connection speed. Unit: sec
