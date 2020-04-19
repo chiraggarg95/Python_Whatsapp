@@ -5,6 +5,16 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By 
 import time 
 
+def get_input_contact():
+
+    contact_name=input('Enter name of contact (as stored in contact list): \n')       #asks for contact name to which message is to be sent.
+    contact_name= "\"" + contact_name + "\""                                        #processing name to "name" for further convenience
+    return contact_name
+    
+def get_input_msg():
+    message=input('Enter the message to be sent(single line message only): \n')       #takes only messages without \n character.
+    return message
+
 def contact_selector(contact_name):                                             #this will select the contact to whom msg needs to be sent.
     
     contact_xpath='//span[@class="_1wjpf _3NFp9 _3FXB1"][@dir="auto"][@title={}]'.format(contact_name)
@@ -44,26 +54,37 @@ driver=webdriver.Firefox()
 # driver=webdriver.Chrome()
 
 driver.get("https://web.whatsapp.com/")
-wait=WebDriverWait(driver, 60)                                                 #change wait time according to internet connection speed. Unit: sec
+wait=WebDriverWait(driver, 15)                                                 #change wait time according to internet connection speed. Unit: sec
 
 #QR code scanning
 
 input('Scan QR code and press Enter')
 
-#data input
+continue_opt='y'
+msg_opt='n'
+contact_opt='n'
 
-contact_name=input('Enter name of contact (as stored in contact list): ')       #asks for contact name to which message is to be sent.
-contact_name= "\"" + contact_name + "\""                                        #processing name to "name" for further convenience
+while(continue_opt=='y'):
 
-message=input('Enter the message to be sent(single line message only): ')       #takes only messages without \n character.
+    if contact_opt=='n':
+        contact_name=get_input_contact()
 
-repetitions=input('Enter number of times you want to send the message: ')
-repetitions=int(repetitions)                                                    #converting to integer
+    if msg_opt=='n':
+        message=get_input_msg()
 
-
-contact_selector(contact_name)
-
-while(repetitions>0):
+    contact_selector(contact_name)
     msg_sender(message)
-    repetitions-=1
-    print('Message sent successfully to {}'.format(contact_name[1:(len(contact_name)-1)]))
+
+    print('Message sent successfully to {} \n'.format(contact_name[1:(len(contact_name)-1)]))
+
+    continue_opt=input('Do you want to send more messages? (y/n): \n').strip()
+    
+    if continue_opt=='y':
+        contact_opt=input('Do you want to send to the same person? (y/n): \n').strip()
+        msg_opt=input('Do you want to repeat the same message? (y/n): \n').strip()
+
+    else:
+        break
+
+print('All messages sent successfully')
+driver.close()
