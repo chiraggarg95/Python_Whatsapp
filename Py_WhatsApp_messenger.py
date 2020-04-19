@@ -59,32 +59,49 @@ wait=WebDriverWait(driver, 15)                                                 #
 #QR code scanning
 
 input('Scan QR code and press Enter')
+repeated_msg=input('Do you want to send same message to same person multiple times? (y/n): \n').strip()
 
-continue_opt='y'
-msg_opt='n'
-contact_opt='n'
+if(repeated_msg=='y'):
 
-while(continue_opt=='y'):
-
-    if contact_opt=='n':
-        contact_name=get_input_contact()
-
-    if msg_opt=='n':
-        message=get_input_msg()
-
+    contact_name=get_input_contact()
+    message=get_input_msg()
+    reps=int(input('Enter the no. of repetitions: \n'))
     contact_selector(contact_name)
-    msg_sender(message)
-
-    print('Message sent successfully to {} \n'.format(contact_name[1:(len(contact_name)-1)]))
-
-    continue_opt=input('Do you want to send more messages? (y/n): \n').strip()
     
-    if continue_opt=='y':
-        contact_opt=input('Do you want to send to the same person? (y/n): \n').strip()
-        msg_opt=input('Do you want to repeat the same message? (y/n): \n').strip()
+    while(reps>0):
+        msg_sender(message)
+        reps-=1
 
-    else:
-        break
+    print('Messages sent to {}.'.format(contact_name[1:(len(contact_name)-1)]))
 
-print('All messages sent successfully')
+else:
+
+    continue_opt='y'
+    msg_opt='n'
+    contact_opt='n'
+
+    while(continue_opt=='y'):
+
+        if contact_opt=='n':
+            contact_name=get_input_contact()
+
+        if msg_opt=='n':
+            message=get_input_msg()
+
+        contact_selector(contact_name)
+        msg_sender(message)
+
+        print('Message sent successfully to {} \n'.format(contact_name[1:(len(contact_name)-1)]))
+
+        continue_opt=input('Do you want to send more messages? (y/n): \n').strip()
+        
+        if continue_opt=='y':
+            contact_opt=input('Do you want to send to the same person? (y/n): \n').strip()
+            msg_opt=input('Do you want to repeat the same message? (y/n): \n').strip()
+
+        else:
+            break
+
+    print('All messages sent successfully')
+
 driver.close()
