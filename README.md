@@ -14,4 +14,5 @@ Web Browser will close after you exit.
 
 
 Note: You can use any web browser you want. All you need to have is the driver for that particular browser.
+
 Note: Currently, this has been tested on Chrome and Firefox
