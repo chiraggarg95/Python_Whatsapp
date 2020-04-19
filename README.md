@@ -7,6 +7,8 @@ You can repeatedly select your choices from the following:
 
     2. Send the same message or different.
 
+You can also choose to send the same message to the same person multiple times.
+
 You can exit after any iteration as per your choice.
 Web Browser will close after you exit.
 
