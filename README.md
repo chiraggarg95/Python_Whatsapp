@@ -2,8 +2,11 @@
 
 This tool will take as input the name of person you want to send the messsage to and your message.
 You can repeatedly select your choices from the following: 
+  
     1. Send to the same person or a different person.
+
     2. Send the same message or different.
+
 You can exit after any iteration as per your choice.
 Web Browser will close after you exit.
 
